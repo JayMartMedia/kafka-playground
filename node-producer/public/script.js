@@ -4,11 +4,11 @@ async function handleFormSubmit (e) {
 
     const customerId = getCustomerId();
     const item = getItem();
-    const orderId = getOrderId();
+    // const orderId = getOrderId();
     const order = {
         customerId,
         item,
-        orderId
+        // orderId
     }
     await fetch('/order', {
         method: 'POST',
@@ -49,16 +49,16 @@ function getItem () {
     document.getElementById('item').value = '';
 }
 
-/**
- * @returns {string} the current value of the orderId input element
- */
-function getOrderId () {
-    return document.getElementById('orderId').value;
-}
+// /**
+//  * @returns {string} the current value of the orderId input element
+//  */
+// function getOrderId () {
+//     return document.getElementById('orderId').value;
+// }
 
-/**
- * @returns {void}
- */
-function clearOrderId () {
-    document.getElementById('orderId').value = '';
-}
+// /**
+//  * @returns {void}
+//  */
+// function clearOrderId () {
+//     document.getElementById('orderId').value = '';
+// }
