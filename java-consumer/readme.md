@@ -4,7 +4,7 @@
 
 # Run
 
-`docker run docker run -it java-consumer`
+`docker run -it java-consumer`
 
 # Resources
 
