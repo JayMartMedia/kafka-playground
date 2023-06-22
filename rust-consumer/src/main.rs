@@ -7,7 +7,7 @@ use kafka::error::Error as KafkaError;
 // that messages must be marked and committed as consumed to ensure
 // only once delivery.
 fn main() {
-    let broker = "localhost:9092".to_owned();
+    let broker = "host.docker.internal:9092".to_owned();
     let topic = "test".to_owned();
     let group = "rust-group2".to_owned();
 
@@ -28,7 +28,7 @@ fn consume_messages(group: String, topic: String, brokers: Vec<String>) -> Resul
         let mss = con.poll()?;
 
         // Remove the false if you want to exit after reading
-        if false || mss.is_empty() {
+        if false && mss.is_empty() {
             println!("No messages available right now.");
             return Ok(());
         }
