@@ -1,15 +1,17 @@
 import express from 'express';
 import Producer from "./producer";
 
+const port = 3000;
 const app = express();
-const port = 3001;
+app.use(express.static('./public'));
+app.use(express.json());
 
 const producer = new Producer('test');
 
-app.get('/order', async (req, res) => {
-    const orderId = req.query.orderId;
-    const customerId = req.query.customerId;
-    const item = req.query.item;
+app.post('/order', async (req, res) => {
+    const orderId = req.body.orderId;
+    const customerId = req.body.customerId;
+    const item = req.body.item;
 
     // Validate request, return early if failed validation
     const validationErrors: string[] = [];
@@ -31,13 +33,14 @@ app.get('/order', async (req, res) => {
     }
 
     return res.send('Order sent successfully');
-})
+});
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 });
 
 process.on('SIGINT', async () => {
+    server.close();
     await producer.disconnect();
     console.log('Producer disconnected, exiting...');
 })

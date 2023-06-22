@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make an Order</title>
+    <style>
+        .container{
+            margin:auto;
+            width: 260px;
+        }
+        h1{
+            text-align: center;
+        }
+        label{
+            float:right;
+        }
+        input{
+            margin-bottom: 1em;
+        }
+        button{
+            clear: both;
+            display:block;
+            margin:auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Make an Order</h1>
+        <form onsubmit="handleFormSubmit(event)" action="">
+            <label>Customer Id:
+                <input type="text" id="customerId" required />
+            </label>
+            <br />
+            <label>Order Id:
+                <input type="number" id="orderId" required />
+            </label>
+            <br />
+            <label>Item:
+                <input type="text" id="item" required />
+            </label>
+            <br />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
