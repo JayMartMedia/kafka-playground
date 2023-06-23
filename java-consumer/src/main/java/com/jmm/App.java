@@ -53,6 +53,9 @@ public class App {
         try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props)) {
             // Subscribe this consumer to the same topic that we wrote messages to earlier
             consumer.subscribe(Arrays.asList(TOPIC));
+
+            System.out.println(TITLE);
+
             // run an infinite loop where we consume and print new messages to the topic
             while (true) {
                 // The consumer.poll method checks and waits for any new messages to arrive for the
