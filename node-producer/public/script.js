@@ -10,13 +10,21 @@ async function handleFormSubmit (e) {
         item,
         // orderId
     }
-    await fetch('/order', {
+    const res = await fetch('/order', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(order)
     });
+
+    if(res.ok){
+        clearItem();
+        const createdOrder = await res.json();
+        displaySuccess(createdOrder);
+    } else {
+        displayFailure(order);
+    }
 }
 
 /** Private **/
@@ -62,3 +70,29 @@ function getItem () {
 // function clearOrderId () {
 //     document.getElementById('orderId').value = '';
 // }
+
+function displaySuccess(order) {
+    const successfulNotification = document.getElementById('success-notification');
+    successfulNotification.getElementsByTagName('pre')[0].innerText = JSON.stringify(order, null, 2);
+    successfulNotification.style.display = 'block';
+    setTimeout(clearSuccess, 5000);
+}
+
+function clearSuccess() {
+    const successfulNotification = document.getElementById('success-notification');
+    successfulNotification.style.display = 'none';
+    successfulNotification.getElementsByTagName('pre').innerText = '';
+}
+
+function displayFailure(order) {
+    const failureNotification = document.getElementById('failure-notification');
+    failureNotification.getElementsByTagName('pre')[0].innerText = JSON.stringify(order, null, 2);
+    failureNotification.style.display = 'block';
+    setTimeout(clearFailure, 5000);
+}
+
+function clearFailure() {
+    const failureNotification = document.getElementById('failure-notification');
+    failureNotification.style.display = 'none';
+    failureNotification.getElementsByTagName('pre').innerText = '';
+}

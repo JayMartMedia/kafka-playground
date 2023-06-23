@@ -29,6 +29,7 @@ app.post('/order', async (req, res) => {
     try{
         await producer.send(JSON.stringify(order), <string>customerId);
     } catch(e) {
+        console.log('Error producing message:', e);
         return res.status(500).send('Failed to submit the order');
     }
 

@@ -18,21 +18,23 @@ class Producer {
         });
     }
 
-    async send (message: string, key: string = this.#getRandomKey()) {
+    async send (value: string, key: string = this.#getRandomKey()) {
         if(!this.#isConnected) {
             await this.#producer.connect();
             this.#isConnected = true;
         }
 
-        await this.#producer.send({
+        const message = {
+            key,
+            value
+        }
+
+        const res = await this.#producer.send({
             topic: this.#topic,
-            messages: [
-                {
-                    key: key,
-                    value: message
-                }
-            ]
+            messages: [ message ]
         });
+
+        console.log('Message: ' + JSON.stringify(message) + '\nProduced to: ' + JSON.stringify(res));
     }
 
     async disconnect () {

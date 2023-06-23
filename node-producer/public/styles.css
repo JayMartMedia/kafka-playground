@@ -1,0 +1,37 @@
+.container {
+    margin: auto;
+    width: 260px;
+}
+h1 {
+    text-align: center;
+}
+label {
+    float: right;
+}
+input {
+    margin-bottom: 1em;
+}
+button {
+    clear: both;
+    display: block;
+    margin: auto;
+}
+#success-notification, #failure-notification {
+    display: none;
+    border-radius: .5em;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: .5em;
+}
+#success-notification {
+    border-color: green;
+}
+#failure-notification {
+    border-color: red;
+}
+pre{
+    white-space: pre-wrap;
+}
+.center{
+    text-align: center;
+}
