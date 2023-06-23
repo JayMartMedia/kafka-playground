@@ -27,7 +27,7 @@ class Program
 
         using (var c = new ConsumerBuilder<Ignore, string>(conf).Build())
         {
-            c.Subscribe("test");
+            c.Subscribe("orders");
 
             CancellationTokenSource cts = new CancellationTokenSource();
             Console.CancelKeyPress += (_, e) => {

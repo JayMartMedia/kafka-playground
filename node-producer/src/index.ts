@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static('./public'));
 app.use(express.json());
 
-const producer = new Producer('test');
+const producer = new Producer('orders');
 
 app.post('/order', async (req, res) => {
     const customerId = req.body.customerId;

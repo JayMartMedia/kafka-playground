@@ -17,7 +17,7 @@ const TITLE: &str = r"
 // only once delivery.
 fn main() {
     let broker = "host.docker.internal:9092".to_owned();
-    let topic = "test".to_owned();
+    let topic = "orders".to_owned();
     let group = "rust-group2".to_owned();
 
     if let Err(e) = consume_messages(group, topic, vec![broker]) {

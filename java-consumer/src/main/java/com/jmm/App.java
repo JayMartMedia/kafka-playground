@@ -12,7 +12,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 
 public class App {
 
-    private static final String TOPIC = "test";
+    private static final String TOPIC = "orders";
     private static final String BOOTSTRAP_SERVERS = "host.docker.internal:9092";
     private static final String TITLE = """
   ______     _  __ _ _ _                      _      _____                 _          
