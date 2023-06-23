@@ -14,6 +14,16 @@ public class App {
 
     private static final String TOPIC = "test";
     private static final String BOOTSTRAP_SERVERS = "host.docker.internal:9092";
+    private static final String TITLE = """
+  _____                      _                      _____                 _          
+ |_   _|                    | |                    / ____|               (_)         
+   | |  _ ____   _____ _ __ | |_ ___  _ __ _   _  | (___   ___ _ ____   ___  ___ ___ 
+   | | | '_ \\ \\ / / _ \\ '_ \\| __/ _ \\| '__| | | |  \\___ \\ / _ \\ '__\\ \\ / / |/ __/ _ \\
+  _| |_| | | \\ V /  __/ | | | || (_) | |  | |_| |  ____) |  __/ |   \\ V /| | (_|  __/
+ |_____|_| |_|\\_/ \\___|_| |_|\\__\\___/|_|   \\__, | |_____/ \\___|_|    \\_/ |_|\\___\\___|
+                                            __/ |                                    
+                                           |___/                                     
+    """;
 
     public static void main(String[] args) throws Exception {
         Thread consumerThread = new Thread(App::consume);
