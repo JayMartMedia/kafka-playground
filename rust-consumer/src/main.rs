@@ -2,6 +2,15 @@
 use kafka::consumer::{Consumer, FetchOffset, GroupOffsetStorage};
 use kafka::error::Error as KafkaError;
 
+const TITLE: &str = r"
+ _____                                                   _       _   _                _____                 _          
+|  __ \                                                 | |     | | (_)              / ____|               (_)         
+| |__) |___  ___ ___  _ __ ___  _ __ ___   ___ _ __   __| | __ _| |_ _  ___  _ __   | (___   ___ _ ____   ___  ___ ___ 
+|  _  // _ \/ __/ _ \| '_ ` _ \| '_ ` _ \ / _ \ '_ \ / _` |/ _` | __| |/ _ \| '_ \   \___ \ / _ \ '__\ \ / / |/ __/ _ \
+| | \ \  __/ (_| (_) | | | | | | | | | | |  __/ | | | (_| | (_| | |_| | (_) | | | |  ____) |  __/ |   \ V /| | (_|  __/
+|_|  \_\___|\___\___/|_| |_| |_|_| |_| |_|\___|_| |_|\__,_|\__,_|\__|_|\___/|_| |_| |_____/ \___|_|    \_/ |_|\___\___|                                 
+";
+
 // This program demonstrates consuming messages through a `Consumer`.
 // This is a convenient client that will fit most use cases.  Note
 // that messages must be marked and committed as consumed to ensure
@@ -23,6 +32,8 @@ fn consume_messages(group: String, topic: String, brokers: Vec<String>) -> Resul
         .with_fallback_offset(FetchOffset::Earliest)
         .with_offset_storage(GroupOffsetStorage::Kafka)
         .create()?;
+
+    println!("{}", TITLE);
 
     loop {
         let mss = con.poll()?;
