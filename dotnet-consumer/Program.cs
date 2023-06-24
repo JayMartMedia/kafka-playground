@@ -2,7 +2,10 @@
 
 class Program
 {
-    private static string title = @"
+    private static string BROKERS = "localhost:9092";
+    private static string CONSUMER_GROUP = "dotnet-group";
+    private static string TOPIC = "orders";
+    private static string TITLE = @"
  _   _       _   _  __ _           _   _                _____                 _          
 | \ | |     | | (_)/ _(_)         | | (_)              / ____|               (_)         
 |  \| | ___ | |_ _| |_ _  ___ __ _| |_ _  ___  _ __   | (___   ___ _ ____   ___  ___ ___ 
@@ -15,8 +18,8 @@ class Program
     {
         var conf = new ConsumerConfig
         { 
-            GroupId = "dotnet-group",
-            BootstrapServers = "localhost:9092",
+            GroupId = CONSUMER_GROUP,
+            BootstrapServers = BROKERS,
             // Note: The AutoOffsetReset property determines the start offset in the event
             // there are not yet any committed offsets for the consumer group for the
             // topic/partitions of interest. By default, offsets are committed
@@ -27,7 +30,7 @@ class Program
 
         using (var c = new ConsumerBuilder<Ignore, string>(conf).Build())
         {
-            c.Subscribe("orders");
+            c.Subscribe(TOPIC);
 
             CancellationTokenSource cts = new CancellationTokenSource();
             Console.CancelKeyPress += (_, e) => {
@@ -35,7 +38,7 @@ class Program
                 cts.Cancel();
             };
 
-            Console.WriteLine(title);
+            Console.WriteLine(TITLE);
 
             try
             {

@@ -12,8 +12,9 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 
 public class App {
 
-    private static final String TOPIC = "orders";
     private static final String BOOTSTRAP_SERVERS = "host.docker.internal:9092";
+    private static final String CONSUMER_GROUP = "java-consumer"
+    private static final String TOPIC = "orders";
     private static final String TITLE = """
   ______     _  __ _ _ _                      _      _____                 _          
  |  ____|   | |/ _(_) | |                    | |    / ____|               (_)         
@@ -35,7 +36,7 @@ public class App {
         Properties props = new Properties();
         props.setProperty("bootstrap.servers", BOOTSTRAP_SERVERS);
         // The group ID is a unique identified for each consumer group
-        props.setProperty("group.id", "my-group-id");
+        props.setProperty("group.id", CONSUMER_GROUP);
         // Since our producer uses a string serializer, we need to use the corresponding
         // deserializer
         props.setProperty("key.deserializer",

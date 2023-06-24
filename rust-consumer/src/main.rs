@@ -1,4 +1,5 @@
 // src: https://github.com/kafka-rust/kafka-rust/blob/master/examples/example-consume.rs
+use std::env;
 use kafka::consumer::{Consumer, FetchOffset, GroupOffsetStorage};
 use kafka::error::Error as KafkaError;
 
@@ -16,24 +17,29 @@ const TITLE: &str = r"
 // that messages must be marked and committed as consumed to ensure
 // only once delivery.
 fn main() {
-    let broker = "host.docker.internal:9092".to_owned();
-    let topic = "orders".to_owned();
-    let group = "rust-group2".to_owned();
+    let broker = env::var("BROKER")
+        .unwrap_or("localhost:9092".to_string()).to_owned();
+    let consumer_group = env::var("CONSUMER_GROUP")
+        .unwrap_or("rust-consumer-group".to_string()).to_owned();
+    let topic = env::var("TOPIC")
+        .unwrap_or("test".to_string()).to_owned();
 
-    if let Err(e) = consume_messages(group, topic, vec![broker]) {
+    if let Err(e) = consume_messages(consumer_group, topic, vec![broker]) {
         println!("Failed consuming messages: {}", e);
     }
 }
 
 fn consume_messages(group: String, topic: String, brokers: Vec<String>) -> Result<(), KafkaError> {
     let mut con = Consumer::from_hosts(brokers)
-        .with_topic(topic)
+        .with_topic(topic.clone())
         .with_group(group)
         .with_fallback_offset(FetchOffset::Earliest)
         .with_offset_storage(GroupOffsetStorage::Kafka)
         .create()?;
 
     println!("{}", TITLE);
+
+    println!("Consuming from topic: {}\n", topic);
 
     loop {
         let mss = con.poll()?;

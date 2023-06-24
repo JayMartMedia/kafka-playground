@@ -2,12 +2,15 @@ import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import Producer from "./producer";
 
+const BROKERS = ['localhost:9092'];
+const KAFKA_TOPIC = 'orders';
+
 const port = 3000;
 const app = express();
 app.use(express.static('./public'));
 app.use(express.json());
 
-const producer = new Producer('orders');
+const producer = new Producer(KAFKA_TOPIC, BROKERS);
 
 app.post('/order', async (req, res) => {
     const customerId = req.body.customerId;

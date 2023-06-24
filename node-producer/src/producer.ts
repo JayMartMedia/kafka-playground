@@ -5,10 +5,10 @@ class Producer {
     #producer: KafkaProducer;
     #isConnected: boolean = false;
 
-    constructor( topic: string ) {
+    constructor( topic: string, brokers: string[] ) {
         const kafka = new Kafka({
             clientId: 'node-producer',
-            brokers: ['localhost:9092']
+            brokers: brokers
         });
 
         this.#topic = topic;
